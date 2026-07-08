@@ -1,269 +1,226 @@
-# 🏛️ Human Capital — Price Index API
+# Human Capital
 
-A full-stack web application that provides a RESTful API for exploring and analyzing **Human Capital Price Index** data across countries, years, and economic indicators.
+A full-stack Price Index Dataset Dashboard for exploring, filtering, comparing, and analyzing global price index records.
 
----
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat&logo=node.js&logoColor=white)
+![React](https://img.shields.io/badge/React-Vite-61DAFB?style=flat&logo=react&logoColor=111111)
+![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?style=flat&logo=mongodb&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 
-## 👩‍💻 Developer
+## Overview
 
-**Rutvi Parakhiya**
-B.E. Computer Engineering — Swaminarayan University, Ahmedabad
-GitHub: [@rutviiparakhiya](https://github.com/rutviiparakhiya)
+Human Capital is a college full-stack web application built to make a large price index dataset easier to explore and understand. The app provides authenticated access to 190,332+ seeded price records across countries, years, months, and economic indicators. Users can browse and filter records, view summary statistics, compare countries or years, and analyze trends through responsive chart visualizations. The project is designed as a complete MERN-style dashboard with a secure REST API and a polished light-mode user interface.
 
----
+## Key Features
 
-## 🚀 Tech Stack
+### Authentication
 
-### Backend
-- Node.js + Express.js
-- MongoDB + Mongoose
-- JWT Authentication
-- bcryptjs, dotenv, cors, morgan
-- express-rate-limit
+- User registration and login with JWT-based authentication
+- Protected frontend routes for authenticated users
+- Profile menu with logout confirmation
+- Role-aware access for admin functionality
 
-### Frontend
-- React.js + Vite
-- Tailwind CSS
-- Redux Toolkit
-- Axios
+### Dashboard & Analytics
 
----
+- Summary stat cards for total records, average value, minimum value, and maximum value
+- Interactive charts for top countries and yearly averages
+- Detailed statistics page with yearly, monthly, country, and distribution visualizations
+- Compact number formatting for large values and readable chart labels
 
-## 📁 Folder Structure
+### Data Management
 
-```
+- Browse price records with pagination
+- Filter records by country, year, month, and indicator
+- Search price data by keyword, country, indicator, value, year, or month
+- Compare countries or years side-by-side
+
+### Admin Tools
+
+- Admin dashboard for high-level dataset overview
+- Admin routes for managing price data
+- API support for create, update, and delete operations
+
+### Backend Quality
+
+- Centralized error handling
+- Input validation middleware
+- Security hardening with Helmet, rate limiting, sanitization, and CORS
+- Swagger API documentation
+- Postman collection included for API testing
+
+## Tech Stack
+
+| Layer | Technologies |
+| --- | --- |
+| Frontend | React, Vite, Tailwind CSS, Redux Toolkit, React Router, Axios, Recharts, Lucide React |
+| Backend | Node.js, Express.js, MongoDB, Mongoose, JWT, bcryptjs |
+| API & Tooling | Swagger, Postman, dotenv, Helmet, express-rate-limit, express-validator |
+
+## Screenshots
+
+Add screenshots to a `screenshots/` folder and update the image paths if needed.
+
+![Dashboard](./screenshots/dashboard.png)
+
+![Prices and Compare Pages](./screenshots/prices-compare.png)
+
+## Project Structure
+
+```text
 human_capital_project_rutvi_prakhaiya/
-├── backend/
-│   ├── config/          # Database configuration
-│   ├── controllers/     # Route handler logic
-│   ├── middlewares/     # Auth, error, rate limiter
-│   ├── models/          # Mongoose schemas
-│   ├── routes/          # Express routers
-│   ├── services/        # Business logic layer
-│   ├── .env             # Environment variables
-│   ├── server.js        # Express app setup
-│   └── index.js         # Server entry point
-├── frontend/
-│   └── src/
-│       ├── components/  # Reusable UI components
-│       ├── features/    # Feature modules
-│       ├── hooks/       # Custom React hooks
-│       ├── pages/       # Application pages
-│       ├── services/    # API service layer
-│       └── store/       # Redux state management
-└── README.md
+|-- backend/
+|   |-- config/          # Database and Swagger configuration
+|   |-- controllers/     # Request handlers
+|   |-- middlewares/     # Auth, validation, and error handling
+|   |-- models/          # Mongoose schemas
+|   |-- routes/          # Express route definitions
+|   |-- services/        # Business logic and service helpers
+|   |-- data.json        # Source dataset used for seeding
+|   |-- seed.js          # Database seeding script
+|   `-- index.js         # Backend entry point
+|-- frontend/
+|   |-- public/          # Static frontend assets
+|   |-- src/
+|   |   |-- components/  # Reusable UI components
+|   |   |-- hooks/       # Custom React hooks
+|   |   |-- pages/       # Application pages
+|   |   |-- services/    # API service layer
+|   |   |-- store/       # Redux Toolkit store and slices
+|   |   `-- utils/       # Formatting and chart helpers
+|   `-- vite.config.js
+`-- README.md
 ```
 
----
+## Getting Started
 
-## ⚙️ Backend Setup
+### 1. Clone the repository
 
 ```bash
-# 1. Go to backend folder
+git clone <your-repository-url>
+cd human_capital_project_rutvi_prakhaiya
+```
+
+### 2. Install backend dependencies
+
+```bash
 cd backend
-
-# 2. Install dependencies
 npm install
-
-# 3. Start server
-node index.js
 ```
 
----
+### 3. Create the backend environment file
 
-## 🌐 API Base URL
-
-```
-http://localhost:5000/api
-```
-
----
-
-## 📡 API Routes Overview
-
-### 🔐 Authentication
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register new user |
-| POST | `/api/auth/login` | Login user |
-| GET | `/api/auth/me` | Get current user |
-| POST | `/api/auth/logout` | Logout user |
-| POST | `/api/auth/change-password` | Change password |
-| POST | `/api/auth/forgot-password` | Forgot password |
-| POST | `/api/auth/reset-password` | Reset password |
-| POST | `/api/auth/send-otp` | Send OTP |
-| POST | `/api/auth/verify-otp` | Verify OTP |
-| POST | `/api/auth/refresh-token` | Refresh token |
-
-### 💰 Prices — Basic CRUD
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/prices` | Get all prices |
-| GET | `/api/prices/:id` | Get price by ID |
-| POST | `/api/prices` | Create price |
-| PUT | `/api/prices/:id` | Replace price |
-| PATCH | `/api/prices/:id` | Update price fields |
-| DELETE | `/api/prices/:id` | Delete price |
-
-### 💰 Prices — Filters & Params
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/prices/country/:countryCode` | By country |
-| GET | `/api/prices/year/:year` | By year |
-| GET | `/api/prices/month/:month` | By month |
-| GET | `/api/prices/indicator/:indicator` | By indicator |
-| GET | `/api/prices/frequency/:freq` | By frequency |
-| GET | `/api/prices/range/:startYear/:endYear` | By year range |
-| GET | `/api/prices/country/:countryCode/latest` | Latest by country |
-| GET | `/api/prices/country/:countryCode/history` | History by country |
-| GET | `/api/prices/year/:year/highest` | Highest in year |
-| GET | `/api/prices/year/:year/lowest` | Lowest in year |
-| GET | `/api/prices/random` | Random prices |
-| GET | `/api/prices/trending` | Trending prices |
-| GET | `/api/prices/recent` | Recent prices |
-| GET | `/api/prices/latest` | Latest prices |
-| GET | `/api/prices/high-value` | High value prices |
-| GET | `/api/prices/low-value` | Low value prices |
-
-### 💰 Prices — Query Params
-| Param | Example | Description |
-|-------|---------|-------------|
-| `year` | `?year=2020` | Filter by year |
-| `month` | `?month=5` | Filter by month |
-| `country` | `?country=IND` | Filter by country |
-| `indicator` | `?indicator=FAO_CP_23012` | Filter by indicator |
-| `freq` | `?freq=M` | Filter by frequency |
-| `minValue` | `?minValue=50` | Min value filter |
-| `maxValue` | `?maxValue=100` | Max value filter |
-| `search` | `?search=consumer` | Search keyword |
-| `page` | `?page=1&limit=10` | Pagination |
-| `sort` | `?sort=-value` | Sort (- = desc) |
-
-### 🌍 Countries
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/countries` | Get all countries |
-| POST | `/api/countries` | Create country |
-
-### 📈 Indicators
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/indicators` | Get all indicators |
-| POST | `/api/indicators` | Create indicator |
-
-### 📅 Months & Years
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/months` | Get all months |
-| GET | `/api/years` | Get all years |
-
-### 📊 Statistics
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/stats/prices` | Price statistics |
-| GET | `/api/stats/highest-value` | Highest value |
-| GET | `/api/stats/lowest-value` | Lowest value |
-| GET | `/api/stats/monthly-average` | Monthly averages |
-| GET | `/api/stats/yearly-average` | Yearly averages |
-| GET | `/api/stats/top-countries` | Top countries |
-| GET | `/api/stats/top-indicators` | Top indicators |
-| GET | `/api/stats/value-distribution` | Value distribution |
-| GET | `/api/stats/records-count` | Total records |
-| GET | `/api/stats/trending` | Trending stats |
-| GET | `/api/stats/country/:countryCode` | Stats by country |
-| GET | `/api/stats/year/:year` | Stats by year |
-| GET | `/api/stats/month/:month` | Stats by month |
-
-### 🔍 Search
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/search/country?name=India` | Search by country name |
-| GET | `/api/search/indicator?text=Consumer` | Search by indicator |
-| GET | `/api/search/value?value=68` | Search by value |
-| GET | `/api/search/month?month=1` | Search by month |
-| GET | `/api/search/year?year=2020` | Search by year |
-| GET | `/api/search/frequency?freq=M` | Search by frequency |
-| GET | `/api/search/prices?q=inflation` | General search |
-
-### 🔀 Compare
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/compare?country1=IND&country2=USA` | Compare countries |
-| GET | `/api/compare/year?year1=2000&year2=2020` | Compare years |
-
-### 🛡️ Admin (JWT + Admin Role Required)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/admin/prices` | Admin get prices |
-| POST | `/api/admin/prices` | Admin create price |
-| PATCH | `/api/admin/prices/:id` | Admin update price |
-| DELETE | `/api/admin/prices/:id` | Admin delete price |
-| GET | `/api/admin/dashboard` | Admin dashboard |
-| GET | `/api/admin/stats` | Admin statistics |
-
-### 🔒 Protected (JWT Required)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/protected/prices` | Protected prices |
-| POST | `/api/protected/prices` | Protected create |
-| PATCH | `/api/protected/prices/:id` | Protected update |
-| DELETE | `/api/protected/prices/:id` | Protected delete |
-
-### 🔑 JWT Routes
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/jwt/profile` | JWT profile |
-| GET | `/api/jwt/dashboard` | JWT dashboard |
-| POST | `/api/jwt/generate-token` | Generate token |
-| POST | `/api/jwt/verify-token` | Verify token |
-| POST | `/api/jwt/refresh-token` | Refresh token |
-| GET | `/api/jwt/admin` | Admin only route |
-| GET | `/api/jwt/user` | User only route |
-| GET | `/api/jwt/check-role/admin` | Check admin role |
-| GET | `/api/jwt/check-role/user` | Check user role |
-
-### 💊 Health & Utility
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/health` | Server health check |
-| GET | `/version` | API version |
-| GET | `/metrics` | Server metrics |
-| GET | `/server-status` | Server status |
-
----
-
-## 🔑 Environment Variables
+Create a `.env` file inside the `backend/` folder:
 
 ```env
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/human_capital
-JWT_SECRET=your_jwt_secret_key
+JWT_SECRET=replace_with_a_secure_secret
 NODE_ENV=development
 ```
 
----
+### 4. Seed the database
 
-## 📦 Dependencies
+Make sure MongoDB is running locally, then seed the dataset:
 
-```json
-{
-  "express": "^4.x",
-  "mongoose": "^7.x",
-  "jsonwebtoken": "^9.x",
-  "bcryptjs": "^2.x",
-  "dotenv": "^16.x",
-  "cors": "^2.x",
-  "morgan": "^1.x",
-  "express-rate-limit": "^6.x"
-}
+```bash
+npm run seed
 ```
 
----
+### 5. Run the backend server
 
-## 🗃️ Dataset
+```bash
+npm run dev
+```
 
-Human Capital Price Index dataset sourced from FAO (Food and Agriculture Organization).
+The API will run at:
 
-[📥 Download Dataset](https://drive.google.com/file/d/11qaP8A5QpJF7s-wBF0tpAt9GG5rsj35-/view?usp=drive_link)
+```text
+http://localhost:5000/api
+```
 
----
+### 6. Install frontend dependencies
+
+Open a new terminal:
+
+```bash
+cd frontend
+npm install
+```
+
+### 7. Run the frontend
+
+```bash
+npm run dev
+```
+
+Open the app in your browser:
+
+```text
+http://localhost:5173
+```
+
+## API Documentation
+
+Swagger documentation is available after starting the backend server:
+
+```text
+http://localhost:5000/api-docs
+```
+
+A Postman collection is also included in the backend folder for quick API testing: `backend/postman_collection.json`.
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `POST` | `/api/auth/register` | Register a new user |
+| `POST` | `/api/auth/login` | Authenticate a user and return a JWT |
+| `GET` | `/api/prices` | Get paginated and filterable price records |
+| `GET` | `/api/stats/prices` | Get overall price statistics |
+| `GET` | `/api/stats/top-countries` | Get countries with the highest average values |
+| `GET` | `/api/compare?country1=IND&country2=USA` | Compare two countries side-by-side |
+
+## Environment Variables
+
+| Variable | Example Value | Description |
+| --- | --- | --- |
+| `PORT` | `5000` | Backend server port |
+| `MONGODB_URI` | `mongodb://localhost:27017/human_capital` | MongoDB connection string |
+| `JWT_SECRET` | `replace_with_a_secure_secret` | Secret key used to sign JWT tokens |
+| `NODE_ENV` | `development` | Application environment |
+
+## Available Scripts
+
+### Backend
+
+```bash
+npm run dev      # Start backend with nodemon
+npm start        # Start backend with Node
+npm run seed     # Seed MongoDB with dataset records
+```
+
+### Frontend
+
+```bash
+npm run dev      # Start Vite development server
+npm run build    # Build frontend for production
+npm run preview  # Preview production build locally
+```
+
+## Roadmap / Future Improvements
+
+- Deploy the frontend and backend to a cloud hosting platform
+- Add CSV export for filtered price records
+- Add automated unit and integration tests
+- Expand comparison tools with more chart types and multi-country selection
+- Add saved filters or bookmarked dashboard views for repeated analysis
+
+## Author
+
+**Rutvi Parakhiya**  
+B.E. Computer Engineering  
+Swaminarayan University  
+
+GitHub: [@your-github-username](https://github.com/your-github-username)
+
+## License
+
+This project was developed as an academic full-stack web application for learning and demonstration purposes.
